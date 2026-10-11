@@ -69,33 +69,9 @@ The shaded area on the left is **Stage 1: rectifier + DC link**. Everything to t
 
 The first one or two cycles are a start-up transient while the DC-link capacitor charges from 0 V.
 
-## How to run
 
-**Requirements:** MATLAB with Simulink, Simscape and Simscape Electrical. Built and tested on **R2026b**.
 
-1. Clone the repo and open `single_phase_to_three_phase.slx`.
-2. Click **Run**.
-3. Open **Scope** to see the rectifier and DC link, and **Scope Inverter** to see Vab and the three-phase currents.
-4. To regenerate the figures in `images/` and print the steady-state numbers, run this from the repo root:
 
-   ```matlab
-   run(fullfile('scripts','plot_results.m'))
-   ```
-
-## Notes and gotchas
-
-- **Gate port in R2026b.** The `Converter (Three-Phase)` **G** port won't connect directly to a Simulink-PS Converter in this release. The six gate signals have to go through the **Six-Pulse Gate Multiplexer**, one physical-signal input per switch.
-- **Gate voltage.** The switches turn on above a **6 V** gate threshold, but the PWM Generator outputs 0/1. A ×15 gain acts as the gate driver.
-- **One ground only.** The circuit has a single ground, at the AC source. The DC link and the inverter side must float. A second ground there would short a bridge diode.
-- **Simscape logging limit.** By default, Simscape keeps only the last 10,000 logged points, which is the last 20 ms at this step size. `plot_results.m` turns the limit off with `sim(mdl,'SimscapeLogLimitData','off')`.
-- **Searching for the converter block.** Searching "three-phase converter" in the Library Browser can miss `Converter (Three-Phase)`, because the block name contains a line break. Browse to *Simscape → Electrical → Semiconductors & Converters → Converters* instead.
-
-## Possible next steps
-
-- **V/f speed control:** change the reference frequency and amplitude together, keeping V/f constant.
-- Replace the RL load with an **induction motor**.
-- Feed the measured DC-link voltage into the PWM Generator's `vdc` input instead of a constant, to compensate for ripple.
-- Add an **LC output filter** and look at total harmonic distortion (THD).
 
 ## Repository layout
 

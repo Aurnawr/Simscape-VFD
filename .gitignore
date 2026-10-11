@@ -1,0 +1,9 @@
+# Simulink / MATLAB build artifacts
+slprj/
+*.slxc
+*.autosave
+*.asv
+*.mex*
+*_ert_rtw/
+*_grt_rtw/
+*_rsim_rtw/

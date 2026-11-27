@@ -7,3 +7,6 @@ slprj/
 *_ert_rtw/
 *_grt_rtw/
 *_rsim_rtw/
+
+# large simulation output (re-create with scripts/run_all_studies.m)
+results/*.mat
